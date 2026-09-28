@@ -16,7 +16,7 @@
 | `npm run test:desktop` | 开发入口实际启动通过：登录、Obsidian 测试知识库连接、手动同步、笔记写入与打开指定笔记、显示器边界、900×600 缩放、系统全屏往返、受限桥接、快捷键、浮窗与 Esc 草稿恢复 |
 | 打包后 Mac 应用运行 | 对 `release/mac-arm64/Fenext.app` 运行同一桌面验收脚本，全部通过，使用隔离测试账户与临时 Obsidian 知识库 |
 | `npm run desktop:mac -- --arm64` | 生成 Fenext-1.0.0-arm64-mac.zip，未签名 |
-| `npm run desktop:win -- --x64` | 生成 Fenext Setup 1.0.0.exe，Windows x64 NSIS 交叉构建，未配置签名证书 |
+| `npm run desktop:win -- --x64` | 生成 Windows x64 NSIS 安装程序，发布资产命名为 Fenext-Setup-1.0.0.exe；交叉构建，未配置签名证书 |
 | 两端内置版本 | 解包检查 app.asar 中 package.json：均为 1.0.0，包含“关于 Fenext”入口 |
 | 桌面图标 | 1024 像素源文件及 macOS `.icns` 均含透明通道；64 像素 Dock 预览确认四角透明、圆角底及原狐狸形象 |
 | `npm run web:package` | 生成 Fenext-Web-1.0.0.zip，包含前端构建、服务源码、worker、部署配置与插件 |

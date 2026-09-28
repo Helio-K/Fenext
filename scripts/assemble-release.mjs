@@ -20,7 +20,8 @@ const files = [
     arch: "arm64",
   },
   {
-    fileName: `Fenext Setup ${version}.exe`,
+    fileName: `Fenext-Setup-${version}.exe`,
+    sourceName: `Fenext Setup ${version}.exe`,
     kind: "desktop",
     platform: "Windows",
     arch: "x64",
@@ -38,15 +39,17 @@ const files = [
   },
 ];
 // Require every advertised artifact before publishing the manifest.
-for (const file of files) await fs.access(path.join(release, file.fileName));
+for (const file of files)
+  await fs.access(path.join(release, file.sourceName || file.fileName));
 await fs.mkdir(output, { recursive: true });
 const artifacts = [];
 for (const file of files) {
-  const source = path.join(release, file.fileName);
+  const source = path.join(release, file.sourceName || file.fileName);
   const bytes = await fs.readFile(source);
   await fs.copyFile(source, path.join(output, file.fileName));
+  const { sourceName, ...published } = file;
   artifacts.push({
-    ...file,
+    ...published,
     version: file.version || version,
     size: bytes.length,
     sha256: crypto.createHash("sha256").update(bytes).digest("hex"),

@@ -7,7 +7,7 @@
 | 文件 | 用途 |
 |---|---|
 | Fenext-1.0.0-arm64-mac.zip | Apple 芯片 Mac 客户端，解压得到 Fenext.app |
-| Fenext Setup 1.0.0.exe | Windows x64 安装程序，尚需 Windows 实机验收 |
+| Fenext-Setup-1.0.0.exe | Windows x64 安装程序，尚需 Windows 实机验收 |
 | Fenext-Web-1.0.0.zip | 网页服务、前端构建、worker、部署配置和文档 |
 | Fenext-Browser-1.0.0.zip | Chrome / Edge 共用的解压安装插件 |
 | SHA256SUMS.txt / manifest.json | 文件完整性校验与版本清单 |
