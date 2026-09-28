@@ -1,0 +1,23 @@
+{
+  "manifest_version": 3,
+  "name": "Fenext插件",
+  "version": "1.0.0",
+  "description": "支持 Chrome 和 Microsoft Edge。从当前文章提取正文，预览后保存到 Fenext。",
+  "permissions": ["activeTab", "scripting", "storage"],
+  "host_permissions": ["http://127.0.0.1/*", "http://localhost/*"],
+  "optional_host_permissions": ["https://*/*"],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "收集到 Fenext",
+    "default_icon": {
+      "16": "icons/16.png",
+      "32": "icons/32.png"
+    }
+  },
+  "icons": {
+    "16": "icons/16.png",
+    "32": "icons/32.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png"
+  }
+}

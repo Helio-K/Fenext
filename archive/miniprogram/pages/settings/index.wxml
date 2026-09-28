@@ -1,0 +1,56 @@
+<view class="page"
+  ><view class="eyebrow">YOUR WORKSPACE</view
+  ><view class="title">我的与设置</view
+  ><view wx:if="{{error}}" class="error">{{error}}</view
+  ><view wx:if="{{notice}}" class="notice success">{{notice}}</view
+  ><view class="panel"
+    ><view class="section-title">AI 服务</view
+    ><view class="muted"
+      >资料和用于比较的笔记会发送给所选提供方。密钥在服务端加密保存。</view
+    ><view class="label">OpenAI 兼容接口地址</view
+    ><input data-field="endpoint" value="{{endpoint}}" bindinput="input" /><view
+      class="label"
+      >模型名称</view
+    ><input
+      data-field="model"
+      value="{{model}}"
+      bindinput="input"
+      placeholder="提供方实际模型标识"
+    /><view class="label">API Key</view
+    ><input
+      password
+      data-field="key"
+      value="{{key}}"
+      bindinput="input"
+      placeholder="{{settings.ai.hasKey?'已保存，留空复用':'在此填写密钥'}}"
+    /><button
+      class="primary"
+      bindtap="save"
+      loading="{{busy}}"
+      disabled="{{busy || !model}}"
+    >
+      保存并校验</button
+    ><view class="small">校验会发送一次模型请求，可能产生费用。</view></view
+  ><view class="panel"
+    ><view class="section-title">同步状态</view
+    ><view class="notice"
+      >云端保存不依赖电脑在线。请在桌面端绑定本机 Obsidian 目录。</view
+    ><view wx:for="{{settings.devices}}" wx:key="id"
+      ><view class="card-title">{{item.name}}</view
+      ><view class="meta">最近连接：{{item.updated_at}}</view
+      ><view class="small"
+        >{{item.status.summary}} {{item.status.error}}</view
+      ></view
+    ></view
+  ><button class="secondary" bindtap="sources">来源与插件</button
+  ><view wx:if="{{sources}}" class="panel"
+    ><view class="card-title">公开网页、PDF、文字、图片</view
+    ><view class="meta">已实现读取；实际读取范围随资料保存。</view
+    ><view class="section-title">Fenext插件 · Chrome / Edge</view
+    ><view class="meta"
+      >在电脑浏览器安装 Fenext插件，连接后提取当前页面并保存到同一知识空间。</view
+    ></view
+  ><view class="notice"
+    >当前为个人测试账号，微信和手机号绑定尚未接入。资料、聊天、建议与历史默认保留；备份按服务端说明执行。</view
+  ><button class="secondary" bindtap="logout">退出登录</button></view
+>

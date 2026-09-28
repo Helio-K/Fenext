@@ -1,0 +1,42 @@
+<view class="page"
+  ><view class="header"
+    ><view class="eyebrow">BUILD YOUR UNDERSTANDING</view
+    ><view class="title">知识库</view
+    ><view class="subtitle">不只记住概念，也记住它何时有用。</view></view
+  ><input
+    placeholder="搜索概念、别名或产品问题…"
+    value="{{q}}"
+    bindinput="search"
+  /><view class="tabs"
+    ><view
+      class="tab {{mode==='concepts'?'active':''}}"
+      data-mode="concepts"
+      bindtap="mode"
+      >按概念</view
+    ><view
+      class="tab {{mode==='questions'?'active':''}}"
+      data-mode="questions"
+      bindtap="mode"
+      >按产品问题</view
+    ></view
+  ><view wx:if="{{error}}" class="error" bindtap="load"
+    >{{error}} · 点击重试</view
+  ><view wx:if="{{loading}}" class="notice">正在加载知识…</view
+  ><view wx:elif="{{!notes.length}}" class="empty"
+    ><view class="empty-title"
+      >{{q?'没有找到相关知识':'知识从第一次收集开始'}}</view
+    ><view class="muted"
+      >{{q?'尝试更短的关键词或别名。':'整理完成的笔记会显示在这里。'}}</view
+    ></view
+  ><view
+    wx:for="{{notes}}"
+    wx:key="id"
+    class="card"
+    data-id="{{item.id}}"
+    bindtap="open"
+    ><view class="status">{{item.level}}</view
+    ><view class="card-title">{{item.title}}</view
+    ><view class="meta">{{item.matchReason || item.reason}}</view
+    ><view class="link">查阅笔记 ↗</view></view
+  ></view
+>

@@ -1,0 +1,30 @@
+<view class="page"
+  ><view class="header"
+    ><view class="eyebrow">FENEXT · PERSONAL KNOWLEDGE</view
+    ><view class="title">欢迎回来</view
+    ><view class="subtitle">在手机上继续你的知识积累。</view></view
+  ><view class="notice"
+    >当前使用真实个人测试账号。请先在桌面或网页创建账号；微信和短信登录需平台配置，尚未开放。</view
+  ><view class="label">账号</view
+  ><input
+    data-field="username"
+    bindinput="input"
+    value="{{username}}"
+    placeholder="个人测试账号"
+  /><view class="label">密码</view
+  ><input
+    password
+    data-field="password"
+    bindinput="input"
+    value="{{password}}"
+    placeholder="登录密码"
+  /><view wx:if="{{error}}" class="error">{{error}}</view
+  ><button
+    class="primary"
+    loading="{{busy}}"
+    disabled="{{busy || !username || !password}}"
+    bindtap="submit"
+  >
+    登录并继续
+  </button></view
+>

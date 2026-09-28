@@ -1,0 +1,16 @@
+<view class="page">
+  <view class="eyebrow">KEEP THE SOURCE IN SIGHT</view>
+  <view class="title">接收微信内容</view>
+  <view class="notice">{{note}}</view>
+  <view wx:if="{{source}}" class="panel">
+    <view class="card-title">{{source.title || '微信转入的资料'}}</view>
+    <view wx:if="{{source.url}}" class="muted">{{source.url}}</view>
+    <view wx:if="{{source.textFiles.length}}" class="muted">文字文件 {{source.textFiles.length}} 个</view>
+    <view wx:if="{{source.files.length}}" class="muted">图片 {{source.files.length}} 张</view>
+  </view>
+  <view wx:else class="empty">尚未收到可处理的链接或素材，请手动添加。</view>
+  <view wx:for="{{unsupported}}" wx:key="index" class="error">{{item}}</view>
+  <view wx:if="{{error}}" class="error">{{error}}</view>
+  <button wx:if="{{source}}" class="primary" loading="{{busy}}" disabled="{{busy}}" bindtap="submit">保存并整理</button>
+  <button class="secondary" bindtap="manual">粘贴正文或补充图片</button>
+</view>

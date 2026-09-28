@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="popup.css" />
+    <title>Fenext插件</title>
+  </head>
+  <body>
+    <header>
+      <div class="brand">
+        <img src="icons/48.png" width="28" height="28" alt="" />
+        <strong>Fenext<span>.</span></strong>
+      </div>
+      <button id="connection-settings" class="text-button" type="button" hidden>
+        连接设置
+      </button>
+    </header>
+    <aside id="update-banner" hidden aria-label="插件更新">
+      <div class="update-row">
+        <strong id="update-title"></strong>
+        <a id="update-download" target="_blank" rel="noopener noreferrer"
+          >下载新版</a
+        >
+      </div>
+      <details>
+        <summary>更新说明与步骤</summary>
+        <ul id="update-changes"></ul>
+        <ol>
+          <li>下载并解压，用新文件覆盖原插件文件夹。</li>
+          <li>
+            在 Chrome 或 Edge 的扩展管理页，点击 Fenext插件的「重新加载」。
+          </li>
+          <li>重新打开插件即可。请保留原文件夹位置，连接设置会保留。</li>
+        </ol>
+      </details>
+    </aside>
+    <h1 id="heading">连接 Fenext</h1>
+    <p id="message" role="status" aria-live="polite"></p>
+    <section id="connection" hidden>
+      <p id="connection-intro" class="hint">
+        在 Fenext 的「设置与同步 →
+        接入与数据」生成接收凭证，填入下方即可开始收集。
+      </p>
+      <form id="connection-form">
+        <label
+          >服务地址<input
+            id="service"
+            type="url"
+            required
+            placeholder="http://127.0.0.1:4310"
+        /></label>
+        <label
+          >接收凭证<input
+            id="token"
+            type="password"
+            required
+            autocomplete="off"
+            placeholder="粘贴 Fenext 接收凭证"
+        /></label>
+        <button id="settings-save" type="submit">连接并继续</button>
+        <button
+          id="cancel-connection"
+          class="text-button full"
+          type="button"
+          hidden
+        >
+          返回收集
+        </button>
+      </form>
+    </section>
+    <section id="collector" hidden>
+      <div id="extract">
+        <p class="hint">请先完成网站验证，再提取当前文章。</p>
+        <button id="capture" type="button">提取当前页面</button>
+      </div>
+      <section id="preview" hidden>
+        <label
+          >想了解什么？<textarea
+            id="question"
+            maxlength="2000"
+            rows="2"
+            placeholder="选填，例如：这篇文章对我的产品方案有什么启发？"
+          ></textarea>
+        </label>
+        <label>标题<input id="title" maxlength="200" /></label>
+        <label>来源链接<input id="source" readonly /></label>
+        <details id="extracted-text">
+          <summary>查看实际提取文字 <span id="text-count"></span></summary>
+          <textarea
+            id="content"
+            aria-label="实际提取文字"
+            maxlength="60000"
+            rows="8"
+          ></textarea>
+        </details>
+        <div class="save-footer">
+          <button id="save" type="button">保存并整理</button>
+        </div>
+      </section>
+    </section>
+    <footer class="version-footer">
+      <div class="version-row">
+        <span id="installed-version"></span>
+        <button id="check-update" class="text-button" type="button" disabled>
+          检查更新
+        </button>
+      </div>
+      <p id="update-status" role="status" aria-live="polite"></p>
+    </footer>
+    <script src="update.js"></script>
+    <script src="capture.js"></script>
+    <script src="popup.js"></script>
+  </body>
+</html>

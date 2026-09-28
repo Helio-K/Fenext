@@ -1,0 +1,72 @@
+{
+  "pages": [
+    "pages/inbox/index",
+    "pages/login/index",
+    "pages/collect/index",
+    "pages/task/index",
+    "pages/library/index",
+    "pages/note/index",
+    "pages/review/index",
+    "pages/settings/index",
+    "pages/receive/index"
+  ],
+  "window": {
+    "navigationBarTitleText": "Fenext",
+    "navigationBarBackgroundColor": "#F6F5F4",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#F6F5F4"
+  },
+  "tabBar": {
+    "color": "#8A8070",
+    "selectedColor": "#0075DE",
+    "backgroundColor": "#F6F5F4",
+    "list": [
+      {
+        "pagePath": "pages/inbox/index",
+        "text": "收集箱"
+      },
+      {
+        "pagePath": "pages/library/index",
+        "text": "知识库"
+      },
+      {
+        "pagePath": "pages/settings/index",
+        "text": "我的"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "supportedMaterials": [
+    {
+      "materialType": "text/html",
+      "name": "用${nickname}收集",
+      "desc": "保存网页链接并整理知识",
+      "path": "pages/receive/index"
+    },
+    {
+      "materialType": "image/png",
+      "name": "用${nickname}收集",
+      "desc": "保存图片并整理知识",
+      "path": "pages/receive/index"
+    },
+    {
+      "materialType": "image/jpeg",
+      "name": "用${nickname}收集",
+      "desc": "保存图片并整理知识",
+      "path": "pages/receive/index"
+    },
+    {
+      "materialType": "image/webp",
+      "name": "用${nickname}收集",
+      "desc": "保存图片并整理知识",
+      "path": "pages/receive/index"
+    },
+    {
+      "materialType": "text/plain",
+      "name": "用${nickname}收集",
+      "desc": "保存文字并整理知识",
+      "path": "pages/receive/index"
+    }
+  ]
+}

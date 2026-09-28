@@ -1,0 +1,53 @@
+<view class="page"
+  ><view class="eyebrow">REVIEW WHAT CHANGES</view
+  ><view class="title">查看这次更新</view
+  ><view wx:if="{{error}}" class="error">{{error}}</view
+  ><block wx:if="{{suggestion}}"
+    ><view class="subtitle">{{suggestion.note.title}}</view
+    ><view class="notice"
+      >{{suggestion.reason}} · 建议已保存，接受后才更新正文。</view
+    ><view
+      wx:if="{{suggestion.base_version!==suggestion.note.version}}"
+      class="error"
+      >当前笔记已发生变化，双方内容均保留。<button
+        class="secondary"
+        bindtap="recompare"
+        loading="{{busy}}"
+      >
+        根据最新笔记重新比较
+      </button></view
+    ><checkbox-group bindchange="select"
+      ><view wx:for="{{suggestion.items}}" wx:key="id" class="panel"
+        ><label
+          ><checkbox
+            value="{{item.id}}"
+            checked="{{item.status==='pending'}}"
+            disabled="{{item.status!=='pending' || suggestion.status!=='pending'}}"
+          />{{item.heading}}</label
+        ><view class="label">原内容</view
+        ><view class="diff-before">{{item.before}}</view
+        ><view class="label">建议内容（可编辑）</view
+        ><textarea
+          data-index="{{index}}"
+          value="{{item.after}}"
+          bindinput="edit"
+          disabled="{{item.status!=='pending' || suggestion.status!=='pending'}}"
+          auto-height
+          maxlength="100000"
+        /></view></checkbox-group
+    ><button
+      class="primary"
+      bindtap="accept"
+      loading="{{busy}}"
+      disabled="{{busy || !selected.length || suggestion.status!=='pending' || suggestion.base_version!==suggestion.note.version}}"
+    >
+      接受所选更新</button
+    ><button
+      class="secondary"
+      bindtap="reject"
+      disabled="{{suggestion.status!=='pending'}}"
+    >
+      暂不采用
+    </button></block
+  ></view
+>

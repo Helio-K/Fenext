@@ -1,0 +1,13 @@
+{
+  "description": "Fenext 原生微信小程序个人测试端",
+  "miniprogramRoot": "./",
+  "compileType": "miniprogram",
+  "appid": "touristappid",
+  "projectname": "Fenext",
+  "setting": {
+    "es6": true,
+    "enhance": true,
+    "minified": true,
+    "urlCheck": true
+  }
+}

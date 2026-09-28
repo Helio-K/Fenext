@@ -1,0 +1,85 @@
+<view class="page"
+  ><view wx:if="{{error}}" class="error" bindtap="load"
+    >{{error}} · 点击重试</view
+  ><block wx:if="{{task}}"
+    ><view class="eyebrow">FROM SOURCE TO KNOWLEDGE</view
+    ><view class="title">{{task.title}}</view
+    ><view class="status">{{task.status}}</view
+    ><view class="notice">{{task.stage === 'failed' && task.checkpoint.sourceIssue ? '已保存原链接，文章正文尚未取得。请补充正文或截图。' : '服务端已接收，资料与处理成果持续保留。'}}</view
+    ><view wx:if="{{task.stage === 'waiting_config'}}" class="notice"
+      >缺少可用 AI 配置，配置后原任务自动继续。<button
+        class="secondary"
+        bindtap="settings"
+      >
+        配置 AI 服务
+      </button></view
+    ><view wx:if="{{task.error}}" class="error">{{task.error}}</view
+    ><view wx:if="{{task.result}}"
+      ><view class="panel"
+        ><view class="body">{{task.result.summary}}</view
+        ><view class="section-title">已新增 · {{task.result.new.length}}</view
+        ><view
+          wx:for="{{task.result.new}}"
+          wx:key="id"
+          class="link"
+          data-id="{{item.id}}"
+          bindtap="open"
+          >{{item.title}} → 已自动保存</view
+        ><view class="section-title"
+          >已存在 · {{task.result.existing.length}}</view
+        ><view
+          wx:for="{{task.result.existing}}"
+          wx:key="id"
+          class="link"
+          data-id="{{item.id}}"
+          bindtap="open"
+          >{{item.title}} → 原笔记</view
+        ><view class="section-title"
+          >更新待查看 · {{task.result.updates.length}}</view
+        ><view
+          wx:for="{{task.result.updates}}"
+          wx:key="id"
+          class="link"
+          data-id="{{item.id}}"
+          data-kind="update"
+          bindtap="open"
+          >{{item.title}} → 查看改动</view
+        ><view wx:for="{{task.result.uncertain}}" wx:key="title" class="notice"
+          >{{item.title}}：{{item.reason}}</view
+        ></view
+      ></view
+    ><view class="panel"
+      ><view class="section-title">原始资料</view
+      ><view class="muted">{{task.input.url}}</view
+      ><view class="body">{{task.input.text}}</view
+      ><image
+        wx:for="{{task.input.images}}"
+        wx:key="index"
+        src="{{item.data}}"
+        mode="widthFix"
+        style="width: 100%; margin: 16rpx 0"
+      /><view wx:if="{{task.question}}" class="notice"
+        >想了解：{{task.question}}</view
+      ><view wx:for="{{task.checkpoint.read}}" wx:key="index" class="small"
+        >{{item.range}}</view
+      ></view
+    ><button
+      wx:if="{{task.stage==='failed' || task.stage==='cancelled'}}"
+      class="primary"
+      data-action="retry"
+      bindtap="action"
+      disabled="{{busy}}"
+    >
+      重试原任务</button
+    ><button
+      wx:if="{{task.stage==='queued' || task.stage==='reading' || task.stage==='extracting' || task.stage==='comparing'}}"
+      class="secondary"
+      data-action="cancel"
+      bindtap="action"
+      disabled="{{busy}}"
+    >
+      取消后续处理</button
+    ><button class="secondary" bindtap="collect">粘贴正文或补充图片</button>
+    <button class="secondary" bindtap="remove" disabled="{{busy}}">删除任务</button></block
+  ></view
+>

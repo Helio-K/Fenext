@@ -1,0 +1,112 @@
+<view class="page"
+  ><view wx:if="{{error}}" class="error">{{error}}</view
+  ><block wx:if="{{note}}"
+    ><view class="eyebrow">KNOWLEDGE NOTE</view
+    ><view class="title">{{note.title}}</view
+    ><view class="status">{{note.level}} · 版本 {{note.version}}</view
+    ><view class="small">云端已保存；本机同步状态见“我的”</view
+    ><view class="tabs"
+      ><view
+        class="tab {{panel==='body'?'active':''}}"
+        data-panel="body"
+        bindtap="panel"
+        >正文</view
+      ><view
+        class="tab {{panel==='chat'?'active':''}}"
+        data-panel="chat"
+        bindtap="panel"
+        >讨论 / 修改</view
+      ><view
+        class="tab {{panel==='history'?'active':''}}"
+        data-panel="history"
+        bindtap="panel"
+        >历史</view
+      ></view
+    ><block wx:if="{{panel==='body'}}"
+      ><view
+        wx:for="{{pending}}"
+        wx:key="id"
+        class="notice"
+        data-id="{{item.id}}"
+        bindtap="review"
+        >更新待查看：{{item.reason}} →</view
+      ><view class="notice">{{note.reason}}</view
+      ><view class="body" user-select>{{note.body}}</view
+      ><view class="section-title">术语与相关知识</view
+      ><view class="grid"
+        ><view
+          wx:for="{{terms}}"
+          wx:key="*this"
+          class="link"
+          data-term="{{item}}"
+          bindtap="term"
+          >{{item}} ↗</view
+        ></view
+      ><view wx:if="{{term}}" class="panel"
+        ><view class="card-title">{{term}}</view
+        ><view
+          wx:for="{{related}}"
+          wx:key="id"
+          class="link"
+          data-id="{{item.id}}"
+          bindtap="related"
+          >{{item.title}} →</view
+        ><view wx:if="{{!related.length}}" class="muted"
+          >此术语尚未收录，不会自动外网搜索。</view
+        ></view
+      ><button class="secondary" bindtap="pronounce">查询并播放词典读法</button
+      ><view wx:if="{{pron}}" class="small"
+        >{{pron.text}} · {{pron.source}}</view
+      ><view class="section-title">来源与依据</view
+      ><view wx:for="{{note.sources}}" wx:key="id" class="card"
+        ><view class="card-title">{{item.title}}</view
+        ><view class="meta">{{item.evidence}}</view></view
+      ><button class="secondary" bindtap="supplement">补充资料</button></block
+    ><block wx:elif="{{panel==='chat'}}"
+      ><view class="notice"
+        >作用范围仅当前笔记。明确编辑会直接执行并保留历史；普通讨论不改正文。</view
+      ><view wx:for="{{messages}}" wx:key="id" class="chat-{{item.role}}"
+        ><view class="small"
+          >{{item.role==='user'?'你':'Fenext'}} · {{item.kind}}</view
+        ><view class="body">{{item.text}}</view></view
+      ><view class="tabs"
+        ><view
+          class="tab {{mode==='discuss'?'active':''}}"
+          data-mode="discuss"
+          bindtap="mode"
+          >讨论</view
+        ><view
+          class="tab {{mode==='edit'?'active':''}}"
+          data-mode="edit"
+          bindtap="mode"
+          >修改笔记</view
+        ></view
+      ><textarea
+        value="{{text}}"
+        bindinput="input"
+        placeholder="提出问题或明确修改指令"
+      /><button
+        class="primary"
+        bindtap="send"
+        loading="{{busy}}"
+        disabled="{{busy || !text}}"
+      >
+        发送
+      </button></block
+    ><block wx:else
+      ><view wx:for="{{history}}" wx:key="id" class="card"
+        ><view class="card-title">版本 {{item.version}} · {{item.actor}}</view
+        ><view class="meta">{{item.reason}}</view
+        ><view class="body">{{item.body}}</view
+        ><button
+          class="secondary"
+          disabled="{{item.version===note.version}}"
+          data-version="{{item.version}}"
+          bindtap="restore"
+        >
+          恢复为新版本
+        </button></view
+      ></block
+    ></block
+  ></view
+>

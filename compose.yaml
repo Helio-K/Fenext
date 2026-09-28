@@ -1,0 +1,30 @@
+services:
+  api:
+    build: .
+    restart: unless-stopped
+    environment: &env
+      HOST: 0.0.0.0
+      DATA_DIR: /data
+      APP_ORIGIN: ${APP_ORIGIN:?Set the deployed HTTPS origin}
+      MASTER_KEY: ${MASTER_KEY:?Set a persistent 64-character hexadecimal key}
+      SETUP_TOKEN: ${SETUP_TOKEN:?Set a strong first-account setup token}
+      AI_ALLOWED_HOSTS: ${AI_ALLOWED_HOSTS:-api.openai.com,api.deepseek.com,dashscope.aliyuncs.com}
+      TAVILY_API_KEY: ${TAVILY_API_KEY:-}
+    volumes:
+      - fenext-data:/data
+    ports:
+      - "127.0.0.1:4310:4310"
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:4310/api/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+  worker:
+    build: .
+    restart: unless-stopped
+    command: ["node", "server/worker.mjs"]
+    environment: *env
+    volumes:
+      - fenext-data:/data
+volumes:
+  fenext-data:

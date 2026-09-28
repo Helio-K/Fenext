@@ -1,0 +1,29 @@
+<view class="page"
+  ><view class="header"
+    ><view class="eyebrow">YOUR LEARNING STARTS HERE</view
+    ><view class="title">收集箱</view
+    ><view class="subtitle"
+      >把值得停留的内容留下，交给 Fenext 整理。</view
+    ></view
+  ><button class="primary" bindtap="collect">＋ 收集资料</button
+  ><input placeholder="搜索收集资料" bindinput="search" value="{{q}}" /><view
+    wx:if="{{error}}"
+    class="error"
+    bindtap="load"
+    >{{error}} · 点击重试</view
+  ><view wx:if="{{loading}}" class="notice">正在加载资料…</view
+  ><view wx:elif="{{!tasks.length}}" class="empty"
+    ><view class="empty-title"
+      >{{q ? '没有匹配的资料' : '每一次好奇，都是起点'}}</view
+    ><view class="muted">提交链接、文字或图片，开始第一份知识。</view></view
+  ><view
+    wx:for="{{tasks}}"
+    wx:key="id"
+    class="card"
+    data-id="{{item.id}}"
+    bindtap="open"
+    ><view class="card-title">{{item.title}}</view
+    ><view class="status">{{item.status}}</view
+    ><view class="meta">{{item.summary}}</view></view
+  ><view class="small">云端接收后，离开小程序也不影响后台任务。</view></view
+>
